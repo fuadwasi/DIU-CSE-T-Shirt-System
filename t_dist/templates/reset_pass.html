@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DIU</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"/>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"/>
+</head>
+<body>
+<nav class="navbar navbar-fixed-top navbar-toggleable-sm navbar-inverse bg-primary mb-3">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#collapsingNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="flex-row d-flex">
+        <a class="navbar-brand mb-1" href="#">DIU</a>
+        <button type="button" class="hidden-md-up navbar-toggler" data-toggle="offcanvas"
+                title="Toggle responsive left sidebar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse" id="collapsingNavbar">
+
+        <ul class="navbar-nav ml-auto">
+
+
+            <li class="nav-item">
+                <a class="nav-link" href={% url "home" %}>Home <span class="sr-only">Home</span></a>
+            </li>
+
+
+            <li class="nav-item active">
+                <a class="nav-link" href={% url "all_std" %}>All Students List</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href={% url "upload" %}>Upload Data</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href={% url "users" %}>Admin List</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href={% url "signup" %}>Admin Registration</a>
+            </li>
+
+
+
+            <li class="nav-item ">
+                <a class="nav-link" href={% url "home" %}>Hello {{user}}</a>
+            </li>
+
+            <li class="nav-item active">
+                <a class="nav-link" href="/logout/">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <form method="post"  id="register-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="name" class="form-control" id="username"
+                   placeholder="{{user}}" name="username" disabled>
+        </div>
+        <div class="form-group">
+            <label for="pass1">Password</label>
+            <input type="password" class="form-control" id="pass1" placeholder="Password" name="pass1">
+        </div>
+        <div class="form-group">
+            <label for="pass2">Re-Enter Password</label>
+            <input type="password" class="form-control" id="pass2" placeholder="Password" name="pass2">
+        </div>
+
+        <button type="submit" id="form-submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <div>
+        <h4>{{ msg2 }}</h4>
+
+
+    </div>
+
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+{#<script>#}
+{#    $(document).ready(function () {#}
+{#        $('#register-form').on('submit', function (e) {#}
+{#            e.preventDefault()#}
+{##}
+{#            let pass1 = $('#pass1').val();#}
+{#            let pass2 = $('#pass2').val();#}
+{#            let username = $('#username').val();#}
+{##}
+{#            if(username === '') {#}
+{#                alert('Username cant be blank')#}
+{#            }#}
+{##}
+{#            if(pass1 === pass2) {#}
+{#                $("#register-form").submit();#}
+{#            }#}
+{#            else {#}
+{#                alert('Password doesnt matched')#}
+{#            }#}
+{#        })#}
+{#    })#}
+{##}
+{#</script>#}
+
+
+</body>
+</html>

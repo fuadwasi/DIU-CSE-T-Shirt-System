@@ -135,7 +135,7 @@
                 <a class="nav-link" href={% url "home" %}>Home <span class="sr-only">Home</span></a>
             </li>
 
-            {% if post == 'super' %}
+
             <li class="nav-item active">
                 <a class="nav-link" href={% url "all_std" %}>All Students List</a>
             </li>
@@ -149,7 +149,7 @@
                 <a class="nav-link" href={% url "signup" %}>Admin Registration</a>
             </li>
 
-            {% endif %}
+
 
             <li class="nav-item ">
                 <a class="nav-link" href={% url "home" %}>Hello {{user}}</a>
@@ -169,79 +169,43 @@
         <div class="col-md-9 col-lg-10 main mx-auto">
 
 
-            <div class="row my-3">
-                <div class="col-md-4">
-                    <div class="card card-inverse card-success">
-                        <div class="card-block bg-success">
-                            <div class="rotate">
-                                <i class="fa fa-user fa-5x"></i>
-                            </div>
-                            <h6 class="text-uppercase">Total Registered Students</h6>
-                            <h1 class="display-1">{{total_std}}</h1>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card card-inverse card-danger">
-                        <div class="card-block bg-danger">
-                            <div class="rotate">
-                                <i class="fa fa-list fa-4x"></i>
-                            </div>
-                            <h6 class="text-uppercase">T-Shirt Collected</h6>
-                            <h1 class="display-1">{{col_std}}</h1>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card card-inverse card-info">
-                        <div class="card-block bg-info">
-                            <div class="rotate">
-                                <i class="fa fa-twitter fa-5x"></i>
-                            </div>
-                            <h6 class="text-uppercase">T-Shirt Not Collected</h6>
-                            <h1 class="display-1">{{ not_col_std }}</h1>
-                        </div>
-                    </div>
-                </div>
 
-            </div>
             <!--/row-->
             <div class="row my-5 mx-auto">
                 <div class="offset-md-2"></div>
                 <div class="col-md-8">
                     <form class="form-inline my-2 my-lg-0" method="post">
                         {% csrf_token %}
-                        <input class="form-control mr-sm-2 w-75" type="search" placeholder="Enter ID or Name" aria-label="Search" name="search">
+                        <input class="form-control mr-sm-2 w-75" type="search" placeholder="Search" aria-label="Search" name="search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                     </form>
-                    <h4 style="color: red" align="center">{{ msg }}</h4>
+                    <h4>{{ msg }}</h4>
+                    <h4>{{ msg2 }}</h4>
                 </div>
             </div>
 
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
-                    <th scope="col">SN</th>
                     <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Status</th>
+                    <th scope="col">Username</th>
                     <th scope="col" class="text-center mx-auto">Action</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for student in students %}
                 <tr>
-                    <td>{{student.id}}</td>
-                    <td>{{student.sID}}</td>
-                    <td>{{student.name}}</td>
-                    <td>{{student.status}}</td>
-                    <td class="text-center mx-auto">
-                        {% if student.status == 'not_taken' %}
-                        <a href="/register/{{ student.id }}" class="btn  btn-success  ">Register</a>
-                    {% else %}
-                         <a  class="btn btn-danger text-light disabled ">Already Registered</a>
+                    {% if student.username != user  %}
+                        <td>{{student.id}}</td>
+                        <td>{{student.username}}</td>
+
+                        <td class="text-center mx-auto">
+
+                            <a href="/r_set/{{ student.id }}" class="btn  btn-success  ">Password Reset</a>
+                            <a href="/delete/{{ student.id }}" class="btn  btn-danger ">Delete</a>
+
+                        </td>
                     {% endif %}
-                    </td>
                 </tr>
                 {% endfor %}
                 </tbody>
